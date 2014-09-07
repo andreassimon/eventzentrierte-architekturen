@@ -13,9 +13,9 @@ public class WrappedMethod {
 		this.method = method;
 	}
 
-	public Object call(Command c) {
+	public Object call(Object... args) {
 		try {
-			return method.invoke(that, c);
+			return method.invoke(that, args);
 		} catch (IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			throw new RuntimeException(e);
