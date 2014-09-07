@@ -13,6 +13,7 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 		AggregateType newInstance;
 		try {
 			newInstance = clazz.newInstance();
+			newInstance.setId(id);
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
