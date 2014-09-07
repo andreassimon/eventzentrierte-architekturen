@@ -42,11 +42,13 @@ public class EventBusTest {
 		final AtomicBoolean secondEventHandlerCalled = new AtomicBoolean(false);
 		
 		eventBus.registerEventHandler(new EventHandler() {
+			@SuppressWarnings("unused")
 			public void on(TestEvent event) {
 				firstEventHandlerCalled.set(true);
 			}
 		});
 		eventBus.registerEventHandler(new EventHandler() {
+			@SuppressWarnings("unused")
 			public void on(TestEvent event) {
 				secondEventHandlerCalled.set(true);
 			}

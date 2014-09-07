@@ -63,9 +63,11 @@ public class CommandGatewayTest {
 		final AtomicBoolean secondCalled = new AtomicBoolean(false);
 		
 		gateway.registerCommandHandler(new CommandHandler() {
+			@SuppressWarnings("unused")
 			public void on(TestCommand cmd) {
 				firstCalled.set(true);
 			}
+			@SuppressWarnings("unused")
 			public void on(AnotherTestCommand cmd) {
 				secondCalled.set(true);
 			}
