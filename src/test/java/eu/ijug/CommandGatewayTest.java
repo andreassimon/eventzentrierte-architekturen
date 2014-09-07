@@ -1,3 +1,4 @@
+
 package eu.ijug;
 
 import static org.junit.Assert.assertFalse;
