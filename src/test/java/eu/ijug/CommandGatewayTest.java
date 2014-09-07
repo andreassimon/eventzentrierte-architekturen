@@ -55,4 +55,23 @@ public class CommandGatewayTest {
 		assertFalse(firstCalled.get());
 		assertTrue(secondCalled.get());
 	}
+	
+	@Test
+	public void itShouldSupportMoreThanOneHandlerMethodInOneClass() {
+		final AtomicBoolean firstCalled = new AtomicBoolean(false);
+		final AtomicBoolean secondCalled = new AtomicBoolean(false);
+		
+		gateway.registerCommandHandler(new CommandHandler() {
+			public void on(TestCommand cmd) {
+				firstCalled.set(true);
+			}
+			public void on(AnotherTestCommand cmd) {
+				secondCalled.set(true);
+			}
+		});
+		
+		gateway.send(new TestCommand());
+		assertTrue(firstCalled.get());
+		assertFalse(secondCalled.get());
+	}
 }
