@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.junit.Test;
 
 public class EventBusTest {
-	public class TestEvent {
+	public class TestEvent implements Event {
 
 	}
 
