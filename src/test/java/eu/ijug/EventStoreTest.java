@@ -64,4 +64,26 @@ public class EventStoreTest {
 		// Expect
 		assertTrue(called.get());
 	}
+	
+	@Test
+	public void itShouldReplayEventsOnAGivenEventBus() {
+		// Given
+		TestEvent event = new TestEvent(27);
+		EventBus customEventBus = new EventBus();
+		
+		final AtomicBoolean called = new AtomicBoolean(false);
+		customEventBus.registerEventHandler(new EventHandler() {
+			@SuppressWarnings("unused")
+			void on(TestEvent event) {
+				called.set(true);
+			}
+		});
+		eventStore.storeEvent(event);
+
+		// When
+		eventStore.replayEvents(customEventBus);
+		
+		// Expect
+		assertTrue(called.get());
+	}
 }

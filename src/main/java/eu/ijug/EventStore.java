@@ -19,5 +19,9 @@ public class EventStore {
 	public Iterable<Event> getAllEvents() {
 		return events;
 	}
+
+	public void replayEvents(EventBus customEventBus) {
+		
+	}
 	
 }
