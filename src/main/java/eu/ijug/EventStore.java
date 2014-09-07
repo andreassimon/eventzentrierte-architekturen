@@ -21,7 +21,9 @@ public class EventStore {
 	}
 
 	public void replayEvents(EventBus customEventBus) {
-		
+		for(Event e : events) {
+			customEventBus.publish(e);
+		}
 	}
 	
 }
