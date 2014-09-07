@@ -1,6 +1,7 @@
 package eu.ijug;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -21,8 +22,8 @@ public class CommandGatewayTest {
 	public void itShouldCallTheCommandHandler() {
 		final AtomicBoolean called = new AtomicBoolean(false);
 
-		gateway.registerCommandHandler(new CommandHandler<TestCommand>() {
-
+		gateway.registerCommandHandler(new CommandHandler() {
+			@SuppressWarnings("unused")
 			public void on(TestCommand command) {
 				called.set(true);
 			}
@@ -36,16 +37,14 @@ public class CommandGatewayTest {
 	public void itShouldLetMeRegisterMoreThanOneDifferentCommandHandlers() {
 		final AtomicBoolean firstCalled = new AtomicBoolean(false);
 		final AtomicBoolean secondCalled = new AtomicBoolean(false);
-		gateway.registerCommandHandler(new CommandHandler<TestCommand>() {
-
-			@Override
+		gateway.registerCommandHandler(new CommandHandler() {
+			@SuppressWarnings("unused")
 			public void on(TestCommand command) {
 				firstCalled.set(true);
 			}
 		});
-		gateway.registerCommandHandler(new CommandHandler<AnotherTestCommand>() {
-
-			@Override
+		gateway.registerCommandHandler(new CommandHandler() {
+			@SuppressWarnings("unused")
 			public void on(AnotherTestCommand command) {
 				secondCalled.set(true);
 			}
