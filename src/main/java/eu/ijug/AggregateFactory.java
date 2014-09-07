@@ -2,9 +2,11 @@ package eu.ijug;
 
 public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 	Class<AggregateType> clazz;
+	EventStore store;
 	
-	public AggregateFactory(Class<AggregateType> clazz) {
+	public AggregateFactory(Class<AggregateType> clazz, EventStore store) {
 		this.clazz = clazz;
+		this.store = store;
 	}
 
 
@@ -22,8 +24,9 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 
 
 
-	public AggregateType loadInstance(String string) {
-		return null;
+	public AggregateType loadInstance(IdType id) {
+		AggregateType instance = createInstance(id);
+		return instance;
 	}
 	
 }
