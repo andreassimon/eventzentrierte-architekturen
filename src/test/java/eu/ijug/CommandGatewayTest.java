@@ -34,18 +34,26 @@ public class CommandGatewayTest {
 	
 	@Test
 	public void itShouldLetMeRegisterMoreThanOneDifferentCommandHandlers() {
+		final AtomicBoolean firstCalled = new AtomicBoolean(false);
+		final AtomicBoolean secondCalled = new AtomicBoolean(false);
 		gateway.registerCommandHandler(new CommandHandler<TestCommand>() {
 
 			@Override
 			public void on(TestCommand command) {
+				firstCalled.set(true);
 			}
 		});
 		gateway.registerCommandHandler(new CommandHandler<AnotherTestCommand>() {
 
 			@Override
 			public void on(AnotherTestCommand command) {
+				secondCalled.set(true);
 			}
 			
 		});
+		
+		gateway.send(new AnotherTestCommand());
+		assertFalse(firstCalled.get());
+		assertTrue(secondCalled.get());
 	}
 }
