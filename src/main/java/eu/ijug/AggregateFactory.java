@@ -20,4 +20,10 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 		return newInstance;
 	}
 
+
+
+	public AggregateType loadInstance(String string) {
+		return null;
+	}
+	
 }
