@@ -26,7 +26,9 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 
 	public AggregateType loadInstance(IdType id) {
 		AggregateType instance = createInstance(id);
+		AggregateFilteredEventBus<IdType> eventBus = new AggregateFilteredEventBus<IdType>(id);
+		eventBus.registerEventHandler(instance);
+		store.replayEvents(eventBus);
 		return instance;
 	}
-	
 }
