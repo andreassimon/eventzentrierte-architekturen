@@ -9,7 +9,7 @@ import java.util.Set;
 public class EventBus {
 	Map<Class<?>, Set<WrappedMethod>> eventHandlers = new HashMap<>();
 
-	public void publish(Object event) {
+	public void publish(Event event) {
 		Class<?> classOfEvent = event.getClass();
 		if(!eventHandlers.containsKey(classOfEvent))
 			return;
