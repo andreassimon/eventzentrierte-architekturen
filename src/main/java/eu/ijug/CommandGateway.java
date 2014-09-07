@@ -13,7 +13,7 @@ public class CommandGateway {
 		commandHandlers.get(cmd.getClass()).call(cmd);
 	}
 
-	public void registerCommandHandler(Object commandHandler) {
+	public void registerCommandHandler(CommandHandler commandHandler) {
 		for (Method method : commandHandler.getClass().getDeclaredMethods()) {
 			Class<?>[] parameters = method.getParameterTypes();
 			if (parameters.length != 1)
