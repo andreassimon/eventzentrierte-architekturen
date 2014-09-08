@@ -1,4 +1,4 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 	Class<AggregateType> clazz;

@@ -1,9 +1,12 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import eu.ijug.framework.Event;
+import eu.ijug.framework.EventBus;
+import eu.ijug.framework.EventHandler;
 import org.junit.Test;
 
 public class EventBusTest {

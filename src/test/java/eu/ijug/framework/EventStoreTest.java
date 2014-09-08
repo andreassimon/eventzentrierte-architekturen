@@ -1,4 +1,4 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -6,6 +6,10 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import eu.ijug.framework.Event;
+import eu.ijug.framework.EventBus;
+import eu.ijug.framework.EventHandler;
+import eu.ijug.framework.EventStore;
 import org.junit.Before;
 import org.junit.Test;
 

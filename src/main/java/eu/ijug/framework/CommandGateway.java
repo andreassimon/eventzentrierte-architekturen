@@ -1,4 +1,4 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

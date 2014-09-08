@@ -1,11 +1,14 @@
 
-package eu.ijug;
+package eu.ijug.framework;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import eu.ijug.framework.Command;
+import eu.ijug.framework.CommandGateway;
+import eu.ijug.framework.CommandHandler;
 import org.junit.Test;
 
 public class CommandGatewayTest {
@@ -39,11 +42,11 @@ public class CommandGatewayTest {
 		final AtomicBoolean firstCalled = new AtomicBoolean(false);
 		final AtomicBoolean secondCalled = new AtomicBoolean(false);
 		gateway.registerCommandHandler(new CommandHandler() {
-			@SuppressWarnings("unused")
-			public void on(TestCommand command) {
-				firstCalled.set(true);
-			}
-		});
+            @SuppressWarnings("unused")
+            public void on(TestCommand command) {
+                firstCalled.set(true);
+            }
+        });
 		gateway.registerCommandHandler(new CommandHandler() {
 			@SuppressWarnings("unused")
 			public void on(AnotherTestCommand command) {

@@ -1,15 +1,16 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import eu.ijug.framework.*;
 import org.junit.Test;
 
 public class AggregateFactoryTest {
 
 	public class AggregateAwareTestEvent implements Event,
-			AggregateAwareEvent<String> {
+            AggregateAwareEvent<String> {
 
 		private String aggregateId;
 

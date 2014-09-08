@@ -1,10 +1,13 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import eu.ijug.framework.Event;
+import eu.ijug.framework.EventHandler;
+import eu.ijug.framework.FilteredEventBus;
 import org.junit.Test;
 
 public class FilteredEventBusTest {

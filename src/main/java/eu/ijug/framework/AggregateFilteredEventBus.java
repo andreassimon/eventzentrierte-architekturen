@@ -1,4 +1,4 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 class AggregateFilteredEventBus<IdType> extends FilteredEventBus {
 	IdType id;

@@ -1,4 +1,4 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 import java.util.ArrayList;
 import java.util.List;

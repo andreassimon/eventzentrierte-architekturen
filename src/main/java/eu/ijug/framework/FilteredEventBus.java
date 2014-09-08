@@ -1,4 +1,4 @@
-package eu.ijug;
+package eu.ijug.framework;
 
 public abstract class FilteredEventBus extends EventBus {
 	public void publish(Event event) {
