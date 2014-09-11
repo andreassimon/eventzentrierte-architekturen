@@ -49,7 +49,7 @@ public class AggregateFactoryTest {
 	public void itShouldReturnAnAggregateOfType() {
 		// Given
 		AggregateFactory<TestAggregate, String> aggregateFactory = new AggregateFactory<TestAggregate, String>(
-				TestAggregate.class, null);
+				TestAggregate.class, new EventStore(new EventBus()));
 
 		// When
 		TestAggregate test = aggregateFactory.createInstance("Foobar");
