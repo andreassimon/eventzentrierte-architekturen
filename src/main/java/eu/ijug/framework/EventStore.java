@@ -25,5 +25,14 @@ public class EventStore {
 			customEventBus.publish(e);
 		}
 	}
+
+	public EventBus getEventBus() {
+		return eventBus;
+	}
+
+	public void setEventBus(EventBus eventBus) {
+		this.eventBus = eventBus;
+	}
+
 	
 }

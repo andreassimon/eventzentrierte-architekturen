@@ -1,4 +1,4 @@
-package eu.ijug.domain;
+package eu.ijug.domain.eventsourcing_only;
 
 import java.util.Date;
 

@@ -8,15 +8,25 @@ import java.util.Set;
 
 public class EventBus {
 	Map<Class<?>, Set<WrappedMethod>> eventHandlers = new HashMap<>();
+	Set<EventBus> secondaryEventBusses = new HashSet<>();
 
 	public void publish(Event event) {
 		Class<?> classOfEvent = event.getClass();
+		
+		for (EventBus secondaryEventbus: secondaryEventBusses) {
+			secondaryEventbus.publish(event);
+		}
+		
 		if(!eventHandlers.containsKey(classOfEvent))
 			return;
-		
+
 		for(WrappedMethod eventHandlingMethod : eventHandlers.get(classOfEvent)) {
 			eventHandlingMethod.call(event);
 		}
+	}
+	
+	public void registerSecondaryEventBus(EventBus secondaryEventBus) {
+		secondaryEventBusses.add(secondaryEventBus);
 	}
 
 	public void registerEventHandler(EventHandler eventHandler) {

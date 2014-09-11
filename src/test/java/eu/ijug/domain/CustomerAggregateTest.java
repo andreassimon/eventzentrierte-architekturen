@@ -9,6 +9,8 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import eu.ijug.domain.eventsourcing_only.Customer;
+import eu.ijug.domain.eventsourcing_only.CustomerWasWon;
 import eu.ijug.framework.AggregateFactory;
 import eu.ijug.framework.EventBus;
 import eu.ijug.framework.EventStore;
@@ -36,5 +38,20 @@ public class CustomerAggregateTest {
 		
 		// Expect
 		assertThat(customer, hasProperty("assignedSalesRepresentative", equalTo("mySalesRepresentative")));
+	}
+	
+	@Test
+	public void theSameThingShouldWorkByCallingAMethodOnTheAggregate() {
+		// Given
+		String customerId = "myCustomer";
+		String salesRepresentativeId = "mySalesRepresentative";
+
+		// When
+		Customer customer = aggregateFactory.createInstance(customerId);
+		customer.wonByRepresentative(salesRepresentativeId);
+		
+		// Expect
+		assertThat(customer, hasProperty("assignedSalesRepresentative", equalTo(salesRepresentativeId)));
+		assertThat(aggregateFactory.loadInstance(customerId), hasProperty("assignedSalesRepresentative", equalTo(salesRepresentativeId)));
 	}
 }

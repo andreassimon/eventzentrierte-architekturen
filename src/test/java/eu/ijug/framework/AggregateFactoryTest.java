@@ -24,7 +24,7 @@ public class AggregateFactoryTest {
 
 	}
 
-	static class TestAggregate implements EventHandler, Aggregate<String> {
+	static class TestAggregate extends Aggregate<String> {
 
 		String id;
 		boolean eventHandlerCalled;
