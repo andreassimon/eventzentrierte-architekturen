@@ -38,6 +38,8 @@ public class EventBus {
 			if (Event.class.equals(classOfEvent)
 					|| !Event.class.isAssignableFrom(classOfEvent))
 				continue;
+			if(!method.isAccessible())
+				method.setAccessible(true);
 			registerEventHandlerMethod(classOfEvent, new WrappedMethod(
 					eventHandler, method));
 		}

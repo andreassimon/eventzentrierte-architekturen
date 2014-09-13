@@ -18,11 +18,11 @@ public class Customer extends Aggregate<String> {
 		return this.id;
 	}
 	
-	public void on(CustomerWasWon event) {
+	private void on(CustomerWasWon event) {
 		this.assignedSalesRepresentative = event.salesRepresentativeId;
 	}
 	
-	public void on(SalesRepresentativeChanged event) {
+	private void on(SalesRepresentativeChanged event) {
 		this.assignedSalesRepresentative = event.newSalesRepresentativeId;
 	}
 
@@ -30,7 +30,7 @@ public class Customer extends Aggregate<String> {
 		return assignedSalesRepresentative;
 	}
 	
-	public void setAssignedSalesRepresentative(String assignedSalesRepresentative) {
+	private void setAssignedSalesRepresentative(String assignedSalesRepresentative) {
 		this.assignedSalesRepresentative = assignedSalesRepresentative;
 	}
 
