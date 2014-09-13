@@ -52,7 +52,7 @@ public class CustomerAggregateTest {
 		
 		// Expect
 		Customer loadedCustomer = aggregateFactory.loadInstance(customerId);
-		assertThat(customer, hasProperty("assignedSalesRepresentative", equalTo(salesRepresentativeId)));
 		assertThat(loadedCustomer, hasProperty("assignedSalesRepresentative", equalTo(salesRepresentativeId)));
+		assertThat(customer, hasProperty("assignedSalesRepresentative", equalTo(salesRepresentativeId)));
 	}
 }
