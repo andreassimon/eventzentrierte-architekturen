@@ -44,7 +44,7 @@ public class EventUpcastingTest {
 		}
 	
 		@Override
-		public List<Event> upcast(Event e) {
+		public List<Event> upcastEvent(Event e) {
 			return Arrays.asList(new FirstNewEvent(), new SecondNewEvent());
 		}
 	}

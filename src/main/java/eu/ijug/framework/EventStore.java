@@ -41,7 +41,7 @@ public class EventStore {
 			if (!upcaster.canHandle(e)) {
 				continue;
 			}
-			List<Event> newEvents = upcaster.upcast(e);
+			List<Event> newEvents = upcaster.upcastEvent(e);
 			for (Event newEvent : newEvents) {
 				doPublishEvent(eventBus, newEvent);
 			}
