@@ -3,6 +3,7 @@ package eu.ijug.framework;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -27,6 +28,7 @@ public class EventUpcastingTest {
 		// Expect
 		verify(eventBus, times(1)).publish(isA(FirstNewEvent.class));
 		verify(eventBus, times(1)).publish(isA(SecondNewEvent.class));
+		verify(eventBus, never()).publish(isA(EventToBeUpcasted.class));
 	}
 
 	public class FirstNewEvent implements Event {
