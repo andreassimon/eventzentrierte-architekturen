@@ -9,7 +9,7 @@ public class EventStore {
 	List<Event> events = new ArrayList<>();
 	Set<EventUpcaster> upcasters = new HashSet<>();
 	EventBus eventBus;
-	
+
 	public EventStore(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
@@ -22,33 +22,32 @@ public class EventStore {
 	public Iterable<Event> getAllEvents() {
 		return events;
 	}
-	
+
 	public void replayEvents(EventBus customEventBus) {
-		for(Event e : events) {
+		for (Event e : events) {
 			doPublishEvent(customEventBus, e);
 		}
 	}
 
 	private void doPublishEvent(EventBus eventBus, Event event) {
 		boolean upcasterUsed = handleUpcasting(eventBus, event);
-		if(!upcasterUsed) {
+		if (!upcasterUsed) {
 			eventBus.publish(event);
 		}
 	}
 
 	private boolean handleUpcasting(EventBus eventBus, Event e) {
-		boolean upcasterUsed = false;
-		for(EventUpcaster upcaster : upcasters) {
-			if(upcaster.canHandle(e)) {
-				List<Event> newEvents = upcaster.upcast(e);
-				for(Event newEvent : newEvents) {
-					doPublishEvent(eventBus, newEvent);
-				}
-				upcasterUsed = true;
-				break;
+		for (EventUpcaster upcaster : upcasters) {
+			if (!upcaster.canHandle(e)) {
+				continue;
 			}
+			List<Event> newEvents = upcaster.upcast(e);
+			for (Event newEvent : newEvents) {
+				doPublishEvent(eventBus, newEvent);
+			}
+			return true;
 		}
-		return upcasterUsed;
+		return false;
 	}
 
 	public EventBus getEventBus() {
@@ -63,5 +62,4 @@ public class EventStore {
 		this.upcasters.add(eventUpcaster);
 	}
 
-	
 }
