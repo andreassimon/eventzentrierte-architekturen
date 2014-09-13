@@ -3,7 +3,6 @@ package eu.ijug.domain.eventsourcing_only;
 import java.util.Date;
 
 import eu.ijug.framework.Aggregate;
-import eu.ijug.framework.EventStore;
 
 public class Customer extends Aggregate<String> {
 	private String id;
