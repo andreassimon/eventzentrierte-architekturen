@@ -29,7 +29,14 @@ public class EventStore {
 		}
 	}
 
-	private void doPublishEvent(EventBus eventBus, Event e) {
+	private void doPublishEvent(EventBus eventBus, Event event) {
+		boolean upcasterUsed = handleUpcasting(eventBus, event);
+		if(!upcasterUsed) {
+			eventBus.publish(event);
+		}
+	}
+
+	private boolean handleUpcasting(EventBus eventBus, Event e) {
 		boolean upcasterUsed = false;
 		for(EventUpcaster upcaster : upcasters) {
 			if(upcaster.canHandle(e)) {
@@ -37,10 +44,11 @@ public class EventStore {
 				for(Event newEvent : newEvents) {
 					doPublishEvent(eventBus, newEvent);
 				}
+				upcasterUsed = true;
+				break;
 			}
 		}
-		if(!upcasterUsed)
-			eventBus.publish(e);
+		return upcasterUsed;
 	}
 
 	public EventBus getEventBus() {
