@@ -9,7 +9,7 @@ class AggregateFilteredEventBus<IdType> extends FilteredEventBus {
 	@Override
 	boolean isRelevant(Event event) {
 		if(!(event instanceof AggregateAwareEvent))
-			return true;
+			return false;
 		
 		AggregateAwareEvent<?> awareEvent = (AggregateAwareEvent<?>) event;
 		
