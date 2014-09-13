@@ -2,11 +2,11 @@ package eu.ijug.framework;
 
 public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 	Class<AggregateType> clazz;
-	EventStore store;
+	EventStore eventStore;
 
 	public AggregateFactory(Class<AggregateType> clazz, EventStore store) {
 		this.clazz = clazz;
-		this.store = store;
+		this.eventStore = store;
 	}
 
 	public AggregateType createInstance(IdType id) {
@@ -14,11 +14,11 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 		try {
 			newInstance = clazz.newInstance();
 			newInstance.setId(id);
-			newInstance.setEventStore(store);
+			newInstance.setEventStore(eventStore);
 			
 			AggregateFilteredEventBus<IdType> eventBus = new AggregateFilteredEventBus<IdType>(id);
 			eventBus.registerEventHandler(newInstance);
-			store.getEventBus().registerSecondaryEventBus(eventBus);
+			eventStore.getEventBus().registerSecondaryEventBus(eventBus);
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(e);
@@ -31,7 +31,7 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 		AggregateFilteredEventBus<IdType> eventBus = new AggregateFilteredEventBus<IdType>(
 				id);
 		eventBus.registerEventHandler(instance);
-		store.replayEvents(eventBus);
+		eventStore.replayEvents(eventBus);
 		return instance;
 	}
 }
