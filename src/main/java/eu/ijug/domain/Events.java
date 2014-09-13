@@ -14,5 +14,8 @@ public class Events {
 //    Rechnung wurde erstellt
 //    Kunde ist umgezogen
 //    Kundenadresse wurde korrigiert
+//    Kunde hat sich beschwert
+//    Kunde hat Gutschrift erhalten
+//    Kunde wurde Segment zugeordnet
 
 }
