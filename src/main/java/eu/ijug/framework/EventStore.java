@@ -34,5 +34,9 @@ public class EventStore {
 		this.eventBus = eventBus;
 	}
 
+	public void registerUpcaster(EventUpcaster eventUpcaster) {
+		
+	}
+
 	
 }
