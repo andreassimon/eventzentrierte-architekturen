@@ -4,6 +4,7 @@ import java.util.Date;
 
 import eu.ijug.framework.Aggregate;
 
+@SuppressWarnings("unused")
 public class Customer extends Aggregate<String> {
 	private String id;
 	private String assignedSalesRepresentative;
