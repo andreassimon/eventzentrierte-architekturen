@@ -47,4 +47,17 @@ public class CustomerAddressTest {
 		// Expect
 		assertThat(customer, hasProperty("address", equalTo(newAddress)));
 	}
+	
+	@Test
+	public void itShouldCorrectTheAddressInCaseOfATypo() {
+		// Given
+		String newAddress = "Dorfstrasse 12, 11111 Musterstadt";
+		customer.noteRelocationToNewAddress("Dorfstrasse 1, 11111 Musterstadt");
+		
+		// When
+		customer.correctMistakeInAddress(newAddress);
+
+		// Expect
+		assertThat(customer, hasProperty("address", equalTo(newAddress)));
+	}
 }

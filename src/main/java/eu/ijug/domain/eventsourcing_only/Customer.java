@@ -47,4 +47,9 @@ public class Customer extends Aggregate<String> {
 			String assignedSalesRepresentative) {
 		this.assignedSalesRepresentative = assignedSalesRepresentative;
 	}
+
+	public void correctMistakeInAddress(String newAddress) {
+		// TODO Auto-generated method stub
+		
+	}
 }
