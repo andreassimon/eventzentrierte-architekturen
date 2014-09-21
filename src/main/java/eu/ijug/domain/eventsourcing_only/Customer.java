@@ -18,33 +18,31 @@ public class Customer extends Aggregate<String> {
 	}
 
 	public void correctMistakeInAddress(String newAddress) {
-		apply(new AddressWasCorrected(this.getId(), newAddress, new Date()));
-		
+		emit(new AddressWasCorrected(this.getId(), newAddress, new Date()));
 	}
 
 	public void noteRelocationToNewAddress(String newAddress) {
-		apply(new CustomerRelocatedToNewAddress(this.getId(), newAddress,
-				new Date()));
+		emit(new CustomerRelocatedToNewAddress(this.getId(), newAddress, new Date()));
 	}
 
 	public void wonByRepresentative(String salesRepresentativeId) {
-		apply(new CustomerWasWon(this.getId(), salesRepresentativeId,
+		emit(new CustomerWasWon(this.getId(), salesRepresentativeId,
 				new Date()));
 	}
 
-	private void on(AddressWasCorrected event) {
+	private void apply(AddressWasCorrected event) {
 		setAddress(event.getNewAddress());
 	}
 
-	private void on(CustomerRelocatedToNewAddress event) {
+	private void apply(CustomerRelocatedToNewAddress event) {
 		setAddress(event.getNewAddress());
 	}
 
-	private void on(CustomerWasWon event) {
+	private void apply(CustomerWasWon event) {
 		setAssignedSalesRepresentative(event.salesRepresentativeId);
 	}
 	
-	private void on(SalesRepresentativeChanged event) {
+	private void apply(SalesRepresentativeChanged event) {
 		setAssignedSalesRepresentative(event.newSalesRepresentativeId);
 	}
 

@@ -21,7 +21,7 @@ public abstract class Aggregate<IdType> implements EventHandler {
 		this.id = id;
 	}
 	
-	protected void apply(Event event) {
+	protected void emit(Event event) {
 		eventStore.storeEvent(event);
 	}
 }
