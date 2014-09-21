@@ -16,6 +16,10 @@ public class Customer extends Aggregate<String> {
 		apply(new CustomerWasWon(this.getId(), salesRepresentativeId, new Date()));
 	}
 
+	public void noteRelocationToNewAddress(String newAddress) {
+		apply(new CustomerHasMove(this.getId(), newAddress, new Date()));
+	}
+
 	private void on(CustomerWasWon event) {
 		setAssignedSalesRepresentative(event.salesRepresentativeId);
 	}
