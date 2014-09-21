@@ -1,5 +1,8 @@
 package eu.ijug.framework;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 	Class<AggregateType> clazz;
 	EventStore eventStore;
@@ -13,17 +16,30 @@ public class AggregateFactory<AggregateType extends Aggregate<IdType>, IdType> {
 		AggregateType newInstance;
 		try {
 			newInstance = clazz.newInstance();
-			newInstance.setId(id);
+			setId(newInstance, id);
 			newInstance.setEventStore(eventStore);
 			
 			AggregateFilteredEventBus<IdType> eventBus = new AggregateFilteredEventBus<IdType>(id);
 			eventBus.registerEventHandler(newInstance);
 			eventStore.getEventBus().registerSecondaryEventBus(eventBus);
 			
-		} catch (InstantiationException | IllegalAccessException e) {
+		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
 		return newInstance;
+	}
+
+	private void setId(AggregateType newInstance, IdType id)
+			throws NoSuchMethodException, IllegalAccessException,
+			InvocationTargetException {
+		Method setIdMethod;
+		try {
+			setIdMethod = clazz.getDeclaredMethod("setId", id.getClass());
+		} catch (NoSuchMethodException e) {
+			setIdMethod = Aggregate.class.getDeclaredMethod("setId", Object.class);
+		}
+		setIdMethod.setAccessible(true);
+		setIdMethod.invoke(newInstance, id);
 	}
 
 	public AggregateType loadInstance(IdType id) {

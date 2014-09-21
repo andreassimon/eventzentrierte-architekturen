@@ -26,19 +26,8 @@ public class AggregateFactoryTest {
 
 	static class TestAggregate extends Aggregate<String> {
 
-		String id;
 		boolean eventHandlerCalled;
 
-		@Override
-		public void setId(String id) {
-			this.id = id;
-		}
-
-		@Override
-		public String getId() {
-			return this.id;
-		}
-		
 		public void on(AggregateAwareTestEvent event) {
 			this.eventHandlerCalled = true;
 		}

@@ -23,7 +23,7 @@ public class CustomerAggregateTest {
 		eventBus = new EventBus();
 		eventStore = new EventStore(eventBus);
 		aggregateFactory = new AggregateFactory<>(Customer.class, eventStore);
-		customerFactory = new CustomerFactory(aggregateFactory, eventStore);
+		customerFactory = new CustomerFactory(aggregateFactory);
 	}
 	
 	@Test

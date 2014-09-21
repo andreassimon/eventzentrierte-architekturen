@@ -16,7 +16,8 @@ public abstract class Aggregate<IdType> implements EventHandler {
 		return id;
 	}
 
-	public void setId(IdType id) {
+	@SuppressWarnings("unused")
+	private void setId(IdType id) {
 		this.id = id;
 	}
 	
