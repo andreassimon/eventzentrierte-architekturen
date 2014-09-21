@@ -9,7 +9,7 @@ import org.junit.Test;
 public class AggregateFactoryTest {
 
 	public class AggregateAwareTestEvent implements Event,
-            AggregateAwareEvent<String> {
+			AggregateAwareEvent<String> {
 
 		private String aggregateId;
 
@@ -31,7 +31,7 @@ public class AggregateFactoryTest {
 		public void on(AggregateAwareTestEvent event) {
 			this.eventHandlerCalled = true;
 		}
-	
+
 	}
 
 	@Test
@@ -52,13 +52,13 @@ public class AggregateFactoryTest {
 		// Given
 		EventStore store = new EventStore(new EventBus());
 		store.storeEvent(new AggregateAwareTestEvent("Foobar"));
-		
+
 		AggregateFactory<TestAggregate, String> aggregateFactory = new AggregateFactory<TestAggregate, String>(
 				TestAggregate.class, store);
-		
+
 		// When
 		TestAggregate aggregate = aggregateFactory.loadInstance("Foobar");
-		
+
 		// Expect
 		assertTrue(aggregate.eventHandlerCalled);
 	}
